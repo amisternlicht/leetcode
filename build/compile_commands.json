@@ -1,0 +1,7 @@
+[
+{
+  "directory": "C:/Users/my/Desktop/tryMe/leetcode/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe   -g -o CMakeFiles\\leetcode.dir\\majorityElement.cpp.obj -c C:\\Users\\my\\Desktop\\tryMe\\leetcode\\majorityElement.cpp",
+  "file": "C:/Users/my/Desktop/tryMe/leetcode/majorityElement.cpp"
+}
+]
