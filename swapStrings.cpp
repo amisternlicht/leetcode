@@ -7,13 +7,15 @@ public:
     void swapStrings(std::string& strings, int len_of_first_string) {
         int len_of_second_string = strings.size() - len_of_first_string;
         if(len_of_second_string == len_of_first_string){
-          for (int i = 0; i < len_of_first_string; i++){
+        //if both have the smae length we cna swap by index
+           for (int i = 0; i < len_of_first_string; i++){
                 char temp = strings[i+len_of_first_string];
                 strings[i+len_of_first_string] = strings[i];
                 strings[i] = temp;
             }
         }
         else {
+            //use iterative algorithm, moving each letter to its final placement, note in this case there can be no collisions 
             int index = 0;
             char last_char = strings[index];
             for (int i = 0; i < strings.size(); i++){
