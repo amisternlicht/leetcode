@@ -28,7 +28,7 @@ Direction 4: From bottom left corner to top left corner.
 
 column = layer, row decrements from n−layer−2 to layer+1.
 
-This process repeats (n+1)/2(n+1)/2(n+1)/2 times until all layers are traversed.
+This process repeats (n+1)/2 times until all layers are traversed.
 */
 class iterativeSolution {
 public:
