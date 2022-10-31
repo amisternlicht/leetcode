@@ -1,13 +1,16 @@
 #include <iostream>
 #include <string>
 
+/* iterative solution to swap two concatenated strings in O(1) space*/
 class Solution {
 public:
-    void swapStrings(std::string strings, int len_of_first_string) {
+    void swapStrings(std::string& strings, int len_of_first_string) {
         int len_of_second_string = strings.size() - len_of_first_string;
         if(len_of_second_string == len_of_first_string){
           for (int i = 0; i < len_of_first_string; i++){
-                strings[i],strings[i+len_of_first_string] = strings[i+len_of_first_string],strings[i];
+                char temp = strings[i+len_of_first_string];
+                strings[i+len_of_first_string] = strings[i];
+                strings[i] = temp;
             }
         }
         else {
@@ -40,15 +43,15 @@ int main(){
 
     Solution s1;
     s1.swapStrings(str1,2);
-    if(!str1.compare("worldhi")){
-        std::cout << str1 << "didnt swap correctly!" << std::endl;
+    if(str1.compare("worldhi")){ // returns 0 when they are equal
+        std::cout << str1 << " didnt swap correctly!" << std::endl;
     }
     s1.swapStrings(str2,5);
-    if(!str2.compare("worldhello")){
-        std::cout << str2 << "didnt swap correctly!" << std::endl;
+    if(str2.compare("worldhello")){
+        std::cout << str2 << " didnt swap correctly!" << std::endl;
     }
     s1.swapStrings(str3,4);
-    if(!str3.compare("arewhat")){
-        std::cout << str3 << "didnt swap correctly!" << std::endl;
+    if(str3.compare("arewhat")){
+        std::cout << str3 << " didnt swap correctly!" << std::endl;
     }
 }
