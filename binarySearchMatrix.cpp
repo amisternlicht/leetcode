@@ -2,41 +2,60 @@
 #include <algorithm>
 #include <iostream>
 
+using intVec = std::vector<int>;
+
+/*by jianchao-li: Search from the top-right element and reduce the search space by one row or column at each time. complexity O(m+n)*/
 class Solution {
 public:
-    bool searchMatrix(std::vector<std::vector<int>>& matrix, int target) {
-        int mid = 2;
-        while(matrix[mid][mid] > target || matrix[mid+1][mid+1] < target){
-             if(matrix[mid][mid] > target){
-                mid = mid/2;
-             }
-             else if(matrix[mid+1][mid+1] < target){
-                mid = mid + (matrix[0].size()-mid)/2;
-             }
+    bool searchMatrix(std::vector<intVec>& matrix, int target) {
+        int row = 0;
+        int col = matrix[0].size() - 1;
+
+        while(row < matrix.size() && col >= 0){
+            if(matrix[row][col] == target){
+                return true;
+            }
+            if(matrix[row][col] < target){
+            //we know that the rest of the numbers in the row (to the left of matrix[row][col]) are definitely smaller as well
+                ++row;
+            }
+            else {
+            //matrix[row][col] > target
+            //we know that the rest of the numbers in the col (under matrix[row][col]) are definitely larger as well
+                --col;
+            }
         }
-        if(matrix[mid][mid] == target){
-            return true;
-        }
-        std::vector<int> temp1,temp2;
-        for(int i=0; i<mid+1; i++){
-           temp1.emplace_back(matrix[mid+1][i]);
-           temp2.emplace_back(matrix[i][mid+1]); 
-        }
-        int result1 = std::binary_search(temp1.begin(),temp1.end(),target);
-        int result2 = std::binary_search(temp2.begin(),temp2.end(),target);
-        return result1 || result2;
+        return false;
     }
 };
 
 int main(){   
-    std::vector<int> vec1 = {1,4,7,11,15};
-    std::vector<int> vec2 = {2,5,8,12,19};
-    std::vector<int> vec3 = {3,6,9,16,22};
-    std::vector<int> vec4 = {10,13,14,17,24};
-    std::vector<int> vec5 = {18,21,23,26,30};
-    std::vector<std::vector<int>> matrix = {vec1,vec2,vec3,vec4,vec5};
+    intVec vec1 = {1,4,7,11,15};
+    intVec vec2 = {2,5,8,12,19};
+    intVec vec3 = {3,6,9,16,22};
+    intVec vec4 = {10,13,14,17,24};
+    intVec vec5 = {18,21,23,26,30};
+    std::vector<intVec> matrix = {vec1,vec2,vec3,vec4,vec5};
     int target = 30;
     Solution s;
-    s.searchMatrix(matrix,target);
+    //bottom right
+    if(!s.searchMatrix(matrix,target)){
+        std::cout << target << " not found" << std::endl;
+    }
+    //top left
+    target = 1;
+    if(!s.searchMatrix(matrix,target)){
+        std::cout << target << " not found" << std::endl;
+    }
+    //middle
+    target = 13;
+    if(!s.searchMatrix(matrix,target)){
+        std::cout << target << " not found" << std::endl;
+    }
+    //not found
+    target = 40;
+    if(!s.searchMatrix(matrix,target)){
+        std::cout << target << " not found" << std::endl;
+    }
     return 0;
 }
